@@ -19,10 +19,7 @@ EOF
 }
 
 # iterate through all resource directories to populate resource arrays
-# for filename in $(ls ../webgl/models/bodies); do
-#     filenames[i]="/bodies/$filename"
-#     let i=i+1
-# done
+# Note that we are adding a final "None" option, as that is an option too
 
 let i=0
 for filename in $(ls ../webgl/models/face); do

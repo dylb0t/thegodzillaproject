@@ -27,3 +27,16 @@ override.tf.json
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
+
+# Dont include anything from webpack / npm / node
+node_modules
+dist
+
+# Dont include Zone Identifiers
+*Zone.Identifier
+
+# Dont keep the randomize tempfile
+/build/tempfile
+
+# Dont keep the testing html output files
+/src/html
