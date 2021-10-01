@@ -15,6 +15,7 @@
   },
   "homepage": "https://www.cutepigclub.com/",
   "dependencies": {
+    "@gltf-transform/core": "^0.12.13",
     "webpack": "^5.53.0",
     "webpack-cli": "^4.8.0"
   },

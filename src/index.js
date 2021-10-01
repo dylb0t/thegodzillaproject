@@ -1,3 +1,4 @@
+import gltfPath from './models/3dpigpreview.gltf';
 import * as THREE from '../build/three.module.js';
 import { OrbitControls } from './jsm/controls/OrbitControls.js';
 import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
@@ -5,15 +6,22 @@ import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
 //import { RoughnessMipmapper } from './jsm/utils/RoughnessMipmapper.js';
 import { FlakesTexture } from './jsm/textures/FlakesTexture.js';
 //import { Reflector } from './jsm/objects/Reflector.js'
-import gltfPath from './models/3dpigpreview.gltf';
+
+
 
 let camera, scene, renderer, groundFX;
 
 init();
 render();
 
-export function init() {
+// var manager = new THREE.LoadingManager();
 
+// manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+//     progressElement.style.width = (itemsLoaded / itemsTotal * 100) + '%';
+// };
+
+export function init() {
+    //const gltfPath = './models/3dpigpreview.gltf';
     const container = document.createElement( 'div' );
     document.body.appendChild( container );
 
@@ -22,17 +30,9 @@ export function init() {
 
     scene = new THREE.Scene();
 
-    //texture.mapping = THREE.EquirectangularReflectionMapping;
+    scene.background = new THREE.Color( 0X000000 );
 
-    //scene.background = texture;
-    scene.background = new THREE.Color( 0XFFD700 );
-    //scene.fog = new THREE.Fog( 0xa0a0a0, 10, 500 );
-    //scene.environment = texture;
-    //const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444, 100 );
-    //hemiLight.position.set( 0, 20, 0 );
-    //scene.add( hemiLight );
-
-    const ambientLight = new THREE.AmbientLight( 0x404040, 5 ); // soft white light
+    const ambientLight = new THREE.AmbientLight( 0x404040, 0.5 ); // soft white light
     scene.add( ambientLight );
 
     // Ground
@@ -44,7 +44,7 @@ export function init() {
     texture.repeat.y = 100;
 
     var groundMaterial = new THREE.MeshStandardMaterial( { 
-        color: 0XFFD700, 
+        color: 0X000000, 
         metalness: .9, 
         roughness: 0.1, 
         //clearcoat: 1.0, 
@@ -86,10 +86,10 @@ export function init() {
 
     scene.add( dirLight );
 
-    const dirLight2 = new THREE.DirectionalLight( 0xffffff );
-    dirLight2.position.set( -15, 10, 2 );
+    // const dirLight2 = new THREE.DirectionalLight( 0xffffff );
+    // dirLight2.position.set( -15, 10, 2 );
 
-    scene.add( dirLight2 );
+    // scene.add( dirLight2 );
 
 
     // Shadow light helper... I hope we don't need this again
@@ -107,7 +107,10 @@ export function init() {
             }
 
         } );
-        gltf.scene.position.y += 9.4
+        //This positions the model right at the ground
+        //gltf.scene.position.y += 9.4
+        //But the wings go below the ground so lets try to raise osme more
+        gltf.scene.position.y += 10.2
 
         scene.add( gltf.scene );
         render();

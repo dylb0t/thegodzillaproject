@@ -1,0 +1,71 @@
+[
+	{
+		"Body": "pigbody0",
+		"Face": "mask0",
+		"Glasses": "glasses0",
+		"Hat": "hat",
+		"tokenId": "0"
+	},
+	{
+		"Body": "pigbody0",
+		"Face": "mask0",
+		"Glasses": "glasses0",
+		"Hat": "hat0",
+		"tokenId": "1"
+	},
+	{
+		"Body": "pigbody0",
+		"Face": "mask0",
+		"Glasses": "glasses0",
+		"Hat": "hat1",
+		"tokenId": "2"
+	},
+	{
+		"Body": "pigbody0",
+		"Face": "mask0",
+		"Glasses": "glasses0",
+		"Hat": "hat2",
+		"tokenId": "3"
+	},
+	{
+		"Body": "pigbody0",
+		"Face": "mask0",
+		"Glasses": "glasses0",
+		"Hat": "hat3",
+		"tokenId": "4"
+	},
+	{
+		"Body": "pigbody0",
+		"Face": "mask0",
+		"Glasses": "glasses0",
+		"Hat": "None",
+		"tokenId": "5"
+	},
+	{
+		"Body": "pigbody0",
+		"Face": "mask0",
+		"Glasses": "glasses1",
+		"Hat": "hat",
+		"tokenId": "6"
+	},
+	{
+		"Body": "pigbody0",
+		"Face": "mask0",
+		"Glasses": "glasses1",
+		"Hat": "hat0",
+		"tokenId": "7"
+	},
+	{
+		"Body": "pigbody0",
+		"Face": "mask0",
+		"Glasses": "glasses1",
+		"Hat": "hat1",
+		"tokenId": "8"
+	},
+	{
+		"Body": "pigbody0",
+		"Face": "mask0",
+		"Glasses": "glasses1",
+		"Hat": "hat2",
+		"tokenId": "9"
+	},

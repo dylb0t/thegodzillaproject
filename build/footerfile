@@ -1,53 +1,47 @@
-				const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 1000, 1000 ), new THREE.MeshStandardMaterial( { color: 0XFFD700, metalness: 1, roughness: 0.5 } ) );
-				//const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 1000, 1000 ),  );
-				mesh.rotation.x = - Math.PI / 2;
-				mesh.receiveShadow = true;
-				scene.add( mesh );
+renderer = new THREE.WebGLRenderer( { antialias: true } );
+    renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    //renderer.setSize( window.innerWidth -150, window.innerHeight -150 );
+    //renderer.setSize( 450, 450 );
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1;
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.shadowMap.enabled = true;
+    //renderer.shadowmap.type = THREE.PCFSoftwareShadowMap;
 
-				renderer = new THREE.WebGLRenderer( { antialias: true } );
-				renderer.setPixelRatio( window.devicePixelRatio );
-                renderer.setSize( window.innerWidth, window.innerHeight );
-				renderer.toneMapping = THREE.ACESFilmicToneMapping;
-				renderer.toneMappingExposure = 1;
-				renderer.outputEncoding = THREE.sRGBEncoding;
-                renderer.shadowMap.enabled = true;
+    render();
 
-                render();
+    container.appendChild( renderer.domElement );
 
-				container.appendChild( renderer.domElement );
+    const controls = new OrbitControls( camera, renderer.domElement );
+    controls.addEventListener( 'change', render ); // use if there is no animation loop
+    controls.minDistance = 25;
+    controls.maxDistance = 75;
+    controls.target.set( 0, 9.4, - 0.2 );
+    controls.maxPolarAngle = 1.55
+    controls.update();
 
-				const controls = new OrbitControls( camera, renderer.domElement );
-				controls.addEventListener( 'change', render ); // use if there is no animation loop
-				controls.minDistance = 25;
-				controls.maxDistance = 75;
-				controls.target.set( 0, 9.4, - 0.2 );
-                controls.maxPolarAngle = 1.55
-				controls.update();
+    window.addEventListener( 'resize', onWindowResize );
 
-				window.addEventListener( 'resize', onWindowResize );
+    //render();
 
-			} 
+} 
 
-			function onWindowResize() {
+function onWindowResize() {
 
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
 
-				renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setSize( window.innerWidth, window.innerHeight );
 
-				render();
+    render();
 
-			}
+}
 
-			//
+//
 
-			function render() {
+function render() {
 
-				renderer.render( scene, camera );
+    renderer.render( scene, camera );
 
-			}
-
-		</script>
-    <!-- </div> -->
-	</body>
-</html>
+}

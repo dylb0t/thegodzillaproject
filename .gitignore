@@ -40,3 +40,7 @@ dist
 
 # Dont keep the testing html output files
 /src/html
+
+#Dont know what this is but shouldnt keep lock files
+package-lock.json
+
