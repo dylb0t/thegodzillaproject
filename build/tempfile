@@ -1,27 +1,19 @@
-import gltfPath3 from '../../models/hats/hat2.gltf'; 
-import gltfPath2 from '../../models/glasses/glasses1.gltf'; 
-import gltfPath1 from '../../models/face/mask0.gltf'; 
-import gltfPath0 from '../../models/bodies/pigbody0.gltf'; 
-import * as THREE from '../build/three.module.js';
-import { OrbitControls } from './jsm/controls/OrbitControls.js';
-import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
-//import { RGBELoader } from './jsm/loaders/RGBELoader.js';
-//import { RoughnessMipmapper } from './jsm/utils/RoughnessMipmapper.js';
-import { FlakesTexture } from './jsm/textures/FlakesTexture.js';
-//import { Reflector } from './jsm/objects/Reflector.js'
-import gltfPath from './models/3dpigpreview.gltf';
-
+import gltfPath5 from '../../../src/models/shirts/Grey.gltf'; 
+import gltfPath4 from '../../../src/models/necklace/Cross.gltf'; 
+import gltfPath3 from '../../../src/models/hats/ETHBallcap.gltf'; 
+import gltfPath2 from '../../../src/models/glasses/Olympia.gltf'; 
+import gltfPath1 from '../../../src/models/face/Mask.gltf'; 
+import gltfPath0 from '../../../src/models/bodies/BronzePig.gltf'; 
+import "../../../src/css/main.css";
+import * as THREE from '../../three.module.js';
+import { OrbitControls } from '../../../src/jsm/controls/OrbitControls.js';
+import { GLTFLoader } from '../../../src/jsm/loaders/GLTFLoader.js';
+import { FlakesTexture } from '../../../src/jsm/textures/FlakesTexture.js';
 
 let camera, scene, renderer, groundFX;
 
 init();
 render();
-
-// var manager = new THREE.LoadingManager();
-
-// manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
-//     progressElement.style.width = (itemsLoaded / itemsTotal * 100) + '%';
-// };
 
 export function init() {
     //const gltfPath = './models/3dpigpreview.gltf';
@@ -35,7 +27,7 @@ export function init() {
 
     scene.background = new THREE.Color( 0X000000 );
 
-    const ambientLight = new THREE.AmbientLight( 0x404040, 0.5 ); // soft white light
+    const ambientLight = new THREE.AmbientLight( 0xcccccc, 0.4 ); // soft white light
     scene.add( ambientLight );
 
     // Ground
@@ -59,20 +51,6 @@ export function init() {
     mesh.rotation.x = - Math.PI / 2;
     mesh.receiveShadow = true;
     scene.add( mesh );
-    //scene.background = mesh;
-    // Add some reflection to it
-    // var planeGeometry = new THREE.PlaneBufferGeometry(1, 1);
-
-    // var mirrorOptions = {
-    // 	clipBias:0.03,
-    // 	textureWidth: window.innerWidth * window.devicePixelRatio,
-    // 	textureHeight: window.innerHeight * window.DevicePixelRatio,
-    // 	recursion: 1
-    // }
-
-    // var mirror = new Reflector(planeGeometry, mirrorOptions);
-    // mirror.rotateX(-Math.PI /2);
-    // scene.add(mirror);
 
     // Shadow casting light
     const dirLight = new THREE.DirectionalLight( 0xffffff );
@@ -89,19 +67,13 @@ export function init() {
 
     scene.add( dirLight );
 
-    // const dirLight2 = new THREE.DirectionalLight( 0xffffff );
-    // dirLight2.position.set( -15, 10, 2 );
-
-    // scene.add( dirLight2 );
-
-
     // Shadow light helper... I hope we don't need this again
     // const helper = new THREE.DirectionalLightHelper( dirLight, 5, "#FFFF00" );
     // scene.add( helper );
 
     const loader = new GLTFLoader() ;
                 
-        loader.load( $gltfPath0, function ( gltf ) {
+        loader.load( gltfPath0, function ( gltf ) {
         gltf.scene.traverse( function ( child ) {
             if ( child.isMesh ) {
                 child.castShadow = true; 
@@ -111,7 +83,7 @@ export function init() {
         scene.add( gltf.scene );
         render();
         } );
-        loader.load( $gltfPath1, function ( gltf ) {
+        loader.load( gltfPath1, function ( gltf ) {
         gltf.scene.traverse( function ( child ) {
             if ( child.isMesh ) {
                 child.castShadow = true; 
@@ -121,7 +93,7 @@ export function init() {
         scene.add( gltf.scene );
         render();
         } );
-        loader.load( $gltfPath2, function ( gltf ) {
+        loader.load( gltfPath2, function ( gltf ) {
         gltf.scene.traverse( function ( child ) {
             if ( child.isMesh ) {
                 child.castShadow = true; 
@@ -131,7 +103,27 @@ export function init() {
         scene.add( gltf.scene );
         render();
         } );
-        loader.load( $gltfPath3, function ( gltf ) {
+        loader.load( gltfPath3, function ( gltf ) {
+        gltf.scene.traverse( function ( child ) {
+            if ( child.isMesh ) {
+                child.castShadow = true; 
+            }
+        } );
+        gltf.scene.position.y += 10.2
+        scene.add( gltf.scene );
+        render();
+        } );
+        loader.load( gltfPath4, function ( gltf ) {
+        gltf.scene.traverse( function ( child ) {
+            if ( child.isMesh ) {
+                child.castShadow = true; 
+            }
+        } );
+        gltf.scene.position.y += 10.2
+        scene.add( gltf.scene );
+        render();
+        } );
+        loader.load( gltfPath5, function ( gltf ) {
         gltf.scene.traverse( function ( child ) {
             if ( child.isMesh ) {
                 child.castShadow = true; 

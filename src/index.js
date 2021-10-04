@@ -1,4 +1,4 @@
-import gltfPath from './models/3dpigpreview.gltf';
+//import gltfPath from './models/3dpigpreview.gltf';
 import * as THREE from '../build/three.module.js';
 import { OrbitControls } from './jsm/controls/OrbitControls.js';
 import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
@@ -11,8 +11,10 @@ import { FlakesTexture } from './jsm/textures/FlakesTexture.js';
 
 let camera, scene, renderer, groundFX;
 
+
 init();
 render();
+animate();
 
 // var manager = new THREE.LoadingManager();
 
@@ -21,7 +23,19 @@ render();
 // };
 
 export function init() {
-    //const gltfPath = './models/3dpigpreview.gltf';
+
+    // const loadingManager = new THREE.LoadingManager( () => {
+	
+	// 	const loadingScreen = document.getElementById( 'loading-screen' );
+	// 	loadingScreen.classList.add( 'fade-out' );
+		
+	// 	// optional: remove loader from DOM via event listener
+	// 	loadingScreen.addEventListener( 'transitionend', loadingScreen.onTransitionEnd );
+		
+	// } );
+
+    const gltfPath = './models/3dpigpreview.gltf';
+    //cost gltfPath = new gltfPath();
     const container = document.createElement( 'div' );
     document.body.appendChild( container );
 
@@ -32,7 +46,7 @@ export function init() {
 
     scene.background = new THREE.Color( 0X000000 );
 
-    const ambientLight = new THREE.AmbientLight( 0x404040, 0.5 ); // soft white light
+    const ambientLight = new THREE.AmbientLight( 0xcccccc, 0.4 ); // soft white light
     scene.add( ambientLight );
 
     // Ground
@@ -182,7 +196,8 @@ export function init() {
     controls.minDistance = 25;
     controls.maxDistance = 75;
     controls.target.set( 0, 9.4, - 0.2 );
-    controls.maxPolarAngle = 1.55
+    controls.maxPolarAngle = 1.55;
+    //controls.autoRotate = true;
     controls.update();
 
     window.addEventListener( 'resize', onWindowResize );
@@ -191,7 +206,7 @@ export function init() {
 
 } 
 
-function onWindowResize() {
+export function onWindowResize() {
 
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
@@ -204,8 +219,8 @@ function onWindowResize() {
 
 //
 
-function render() {
-
+export function render() {
+    
     renderer.render( scene, camera );
 
 }

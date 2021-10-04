@@ -37,6 +37,8 @@ dist
 
 # Dont keep the randomize tempfile
 /build/tempfile
+# Don't keep teh build output, it can be rebuilt
+/build/*
 
 # Dont keep the testing html output files
 /src/html
