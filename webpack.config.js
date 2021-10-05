@@ -1,5 +1,6 @@
 var HtmlWebpackPlugin = require("html-webpack-plugin")
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+const TerserPlugin = require('terser-webpack-plugin');
 module.exports = (env) => {
     console.log('pigNumber: ', env.pigNumber);
 
@@ -13,6 +14,13 @@ module.exports = (env) => {
             }),
             new CleanWebpackPlugin()
         ],
+	optimization: {
+		minimizer: [
+			new TerserPlugin({
+				parallel: true
+			})
+		]
+	},
         output: {
             filename: '[fullhash].js',
             path: __dirname + '/dist/' + env.pigNumber
