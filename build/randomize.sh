@@ -102,7 +102,7 @@ let pigNumber=0
 echo "[" > metadata
 for filename in $(ls ../src/models/bodies); do
 
-    echo "Body: $filename"
+    
     for face in "${faces[@]}"; do
         for glass in "${glasses[@]}"; do
             for hat in "${hats[@]}"; do
@@ -116,7 +116,7 @@ for filename in $(ls ../src/models/bodies); do
                             insertresource "/bodies/$filename" $gltfCount
 
                             let "gltfCount++"
-
+                            echo "Body: $filename"
                             # Insert body into metadata
                             echo -e "\t{\n\t\t\"Body\": \"$(basename $filename .gltf)\"," >> metadata
 
@@ -206,6 +206,10 @@ for filename in $(ls ../src/models/bodies); do
 
                             npm start -- --env pigNumber=$pigNumber
 
+                            end=`date +%s`
+                            runtime=$((end-start))
+                            echo "Script prgress: Randomized and compiled $pigNumber 3D Pigs in $runtime seconds..."
+                            
                             #increment the pig number
                             let "pigNumber++"
                             echo "Pig Number $pigNumber"
