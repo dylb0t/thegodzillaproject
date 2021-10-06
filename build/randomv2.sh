@@ -116,9 +116,15 @@ for filename in $(ls ../src/models/bodies); do
     let i=i+1
 done
 
+let i=0
+for filename in $(ls ../src/models/eyes); do
+    eyes[i]="/eyes/$filename"
+    let i=i+1
+done
+
 # Metadata human readable names
-hrNames=("Body" "Accessory" "Face" "Glasses" "Hat" "Necklace" "Shirt")
-arNames=("bodies" "accessories" "faces" "glasses" "hats" "necklaces" "shirts")
+hrNames=("Body" "Accessory" "Face" "Glasses" "Hat" "Necklace" "Shirt" "Eyes")
+arNames=("bodies" "accessories" "faces" "glasses" "hats" "necklaces" "shirts" "eyes")
 # Every pig needs a body... So we will do the randomization for every single body
 # And we will just do pignumbers from zero
 let pigNumber=0
@@ -135,11 +141,13 @@ do
     dig[4]=$(( $RANDOM % (${#hats[@]}) ))
     dig[5]=$(( $RANDOM % (${#necklaces[@]}) ))
     dig[6]=$(( $RANDOM % (${#shirts[@]}) ))
+    dig[7]=$(( $RANDOM % (${#eyes[@]}) ))
 
-    echo ${dig[0]}${dig[1]}${dig[2]}${dig[3]}${dig[4]}${dig[5]}${dig[6]}
+    #echo ${dig[0]}${dig[1]}${dig[2]}${dig[3]}${dig[4]}${dig[5]}${dig[6]}${dig[7]}
 
     # build number from array
-    serialNumber=${dig[0]}${dig[1]}${dig[2]}${dig[3]}${dig[4]}${dig[5]}${dig[6]}
+    serialNumber=${dig[0]}${dig[1]}${dig[2]}${dig[3]}${dig[4]}${dig[5]}${dig[6]}${dig[7]}
+    echo $serialNumber
     # see if number was already drawn
     if [[ " ${serialNumbers[*]} " =~ " ${serialNumber} " ]]; then
         # whatever you want to do when array contains value
@@ -157,7 +165,7 @@ do
         cat ./topfile.js > tempfile
 
         let i=0
-        for i in {0..6}; do
+        for i in {0..7}; do
             #echo $i
             rando=${dig[$i]}
             if [ $rando -eq 0 ] && [ $i -ne 0 ] # Zeros are always "NONE", except when a body
