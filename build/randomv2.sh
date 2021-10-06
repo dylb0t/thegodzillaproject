@@ -46,6 +46,20 @@ insertresource() {
     
 cat <<-EOF >> tempfile
         loader.load( gltfPath$2, function ( gltf ) {
+        gltf.scene.position.y += 10.2
+        scene.add( gltf.scene );
+        render();
+        } );
+EOF
+}
+
+insertshadowresource() {
+    #First, add the gltf to the top of the file so it will get included when webpack is run
+    #The count is so we make sure each one is unique
+    echo -e "import gltfPath$2 from '../../../src/models$1'; \n$(cat tempfile)" > tempfile
+    
+cat <<-EOF >> tempfile
+        loader.load( gltfPath$2, function ( gltf ) {
         gltf.scene.traverse( function ( child ) {
             if ( child.isMesh ) {
                 child.castShadow = true; 
@@ -68,7 +82,6 @@ for filename in $(ls ../src/models/face); do
     faces[i]="/face/$filename"
     let i=i+1
 done
-
 
 let i=0
 glasses[i]="NONE"
@@ -103,8 +116,6 @@ for filename in $(ls ../src/models/necklace); do
 done
 
 let i=0
-shirts[i]="NONE"
-let "i++"
 for filename in $(ls ../src/models/shirts); do
     shirts[i]="/shirts/$filename"
     let i=i+1
@@ -168,11 +179,10 @@ do
         for i in {0..7}; do
             #echo $i
             rando=${dig[$i]}
-            if [ $rando -eq 0 ] && [ $i -ne 0 ] # Zeros are always "NONE", except when a body
+            if [ $rando -eq 0 ] && [ $i -ne 0 ] && [ $i -ne 6 ] # Zeros are always "NONE", except when a body
             then
                 echo -e "\t\t\"${hrNames[$i]}\": \"None\"," >> metadata
-                # if hats are none, hair is none too
-                if [ $i -eq 4 ]
+                if [ $i -eq 4 ] # if hats are none, hair is none too
                 then
                     echo -e "\t\t\"Hair\": \"None\"," >> metadata
                 fi
