@@ -179,7 +179,7 @@ do
         for i in {0..7}; do
             #echo $i
             rando=${dig[$i]}
-            if [ $rando -eq 0 ] && [ $i -ne 0 ] && [ $i -ne 6 ] && [ $i -ne 7 ]# Zeros are always "NONE", except when a body
+            if [ $rando -eq 0 ] && [ $i -ne 0 ] && [ $i -ne 6 ] && [ $i -ne 7 ] # Zeros are always "NONE", except when a body
             then
                 echo -e "\t\t\"${hrNames[$i]}\": \"None\"," >> metadata
                 if [ $i -eq 4 ] # if hats are none, hair is none too
@@ -225,11 +225,12 @@ do
 
         end=`date +%s`
         runtime=$((end-start))
-        echo "Script prgress: Randomized and compiled $pigNumber 3D Pigs in $runtime seconds..."
 
         #increment the pig number
         let "pigNumber++"
         echo "Pig Number $pigNumber"
+
+        echo "Script prgress: Randomized and compiled $pigNumber 3D Pigs in $runtime seconds..."
     fi
  
 
