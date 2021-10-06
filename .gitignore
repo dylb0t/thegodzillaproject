@@ -39,6 +39,8 @@ dist
 /build/tempfile
 # Don't keep teh build output, it can be rebuilt
 /build/output/*
+/build/metadata
+/build/tempfile
 
 # Dont keep the testing html output files
 /src/html
@@ -46,3 +48,5 @@ dist
 #Dont know what this is but shouldnt keep lock files
 package-lock.json
 
+build/metadata
+build/tempfile

@@ -14,7 +14,7 @@ let camera, scene, renderer, groundFX;
 
 init();
 render();
-animate();
+//animate();
 
 // var manager = new THREE.LoadingManager();
 
@@ -34,7 +34,7 @@ export function init() {
 		
 	// } );
 
-    const gltfPath = './models/3dpigpreview.gltf';
+    //const gltfPath = './models/3dpigpreview.gltf';
     //cost gltfPath = new gltfPath();
     const container = document.createElement( 'div' );
     document.body.appendChild( container );
@@ -111,13 +111,11 @@ export function init() {
     // scene.add( helper );
 
     const loader = new GLTFLoader() ;
-    loader.load( gltfPath, function ( gltf ) {
+    loader.load( './models/bodies/BrownPig.gltf', function ( gltf ) {
         gltf.scene.traverse( function ( child ) {
 
             if ( child.isMesh ) {
                 child.castShadow = true; 
-                //child.material = groundMaterial;
-                //child.receiveShadow = true;
             }
 
         } );
@@ -130,51 +128,75 @@ export function init() {
         render();
     } );
 
-    // loader.load( 'face/mask1.gltf', function ( gltf ) {
-    // 	gltf.scene.traverse( function ( child ) {
+    loader.load( './models/accessories/Wings.gltf', function ( gltf ) {
+    	gltf.scene.traverse( function ( child ) {
 
-    // 		if ( child.isMesh ) {
-    // 			child.castShadow = true; 
-    // 			child.material = groundMaterial;
-    // 		}
-    // 	} );
-    // 	gltf.scene.position.y += 9.4
+    		if ( child.isMesh ) {
+    			child.castShadow = true; 
+    		}
+    	} );
+    	gltf.scene.position.y += 10.2
 
-    // 	scene.add( gltf.scene );
-    // 	//render();
+    	scene.add( gltf.scene );
+    	//render();
 
-    // } );
+    } );
 
-    // loader.load( 'glasses/glasses.gltf', function ( gltf ) {
-    // 	gltf.scene.traverse( function ( child ) {
+    loader.load( './models/glasses/Hornrim.gltf', function ( gltf ) {
+    	gltf.scene.traverse( function ( child ) {
 
-    // 		if ( child.isMesh ) {
-    // 			child.castShadow = true; 
-    // 		}
-    // 	} );
-    // 	gltf.scene.position.y += 9.4
+    		if ( child.isMesh ) {
+    			child.castShadow = true; 
+    		}
+    	} );
+    	gltf.scene.position.y += 10.2
 
-    // 	scene.add( gltf.scene );
-    // 	//render();
+    	scene.add( gltf.scene );
+    	//render();
 
-    // } );
+    } );
 
-    // loader.load( 'hats/hat2.gltf', function ( gltf ) {
-    // 	gltf.scene.traverse( function ( child ) {
+    loader.load( './models/hats/Fedora.gltf', function ( gltf ) {
+    	gltf.scene.traverse( function ( child ) {
 
-    // 		if ( child.isMesh ) {
-    // 			child.castShadow = true; 
-    // 		}
-    // 		if ( child.isMaterial ) {
-    // 			child.Material.side = THREE.DoubleSide;
-    // 		}
-    // 	} );
-    // 	gltf.scene.position.y += 9.4
+    		if ( child.isMesh ) {
+    			child.castShadow = true; 
+    		}
+    	} );
+    	gltf.scene.position.y += 10.2
 
-    // 	scene.add( gltf.scene );
-    // 	render();
+    	scene.add( gltf.scene );
+    	render();
 
-    // } );
+    } );
+
+    loader.load( './models/necklace/Cross.gltf', function ( gltf ) {
+    	gltf.scene.traverse( function ( child ) {
+
+    		if ( child.isMesh ) {
+    			child.castShadow = true; 
+    		}
+    	} );
+    	gltf.scene.position.y += 10.2
+
+    	scene.add( gltf.scene );
+    	render();
+
+    } );
+
+    loader.load( './models/shirts/Polkadot.gltf', function ( gltf ) {
+    	gltf.scene.traverse( function ( child ) {
+
+    		if ( child.isMesh ) {
+    			child.castShadow = true; 
+    		}
+    	} );
+    	gltf.scene.position.y += 10.2
+
+    	scene.add( gltf.scene );
+    	render();
+
+    } );
 
     renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setPixelRatio( window.devicePixelRatio );

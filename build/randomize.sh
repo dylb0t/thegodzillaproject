@@ -147,13 +147,13 @@ for filename in $(ls ../src/models/bodies); do
                             then
                                 basename $hat
                                 case $(basename $hat .gltf) in
-                                "hair*")
+                                hair*)
                                     echo -e "\t\t\"Hair\": \"$(basename $hat .gltf)\"," >> metadata
                                     echo -e "\t\t\"Hat\": \"None\"," >> metadata
                                 ;;
                                 *)
-                                    echo -e "\t\t\"Hat\": \"$(basename $hat .gltf)\"," >> metadata
                                     echo -e "\t\t\"Hair\": \"None\"," >> metadata
+                                    echo -e "\t\t\"Hat\": \"$(basename $hat .gltf)\"," >> metadata
                                 ;;
                                 esac
                                 insertresource $hat $gltfCount
