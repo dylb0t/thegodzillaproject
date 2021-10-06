@@ -188,8 +188,8 @@ do
                     esac
                 else
                 echo -e "\t\t\"${hrNames[$i]}\": \"$modelBase\"," >> metadata
-                insertresource $modelPath $gltfCount
                 fi
+                insertresource $modelPath $gltfCount
                 #echo $modelPath
                 let "gltfCount++"
             fi
