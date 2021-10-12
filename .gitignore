@@ -48,5 +48,6 @@ dist
 #Dont know what this is but shouldnt keep lock files
 package-lock.json
 
-build/metadata
 build/tempfile
+build/copies
+nohup.out
