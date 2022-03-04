@@ -10,7 +10,7 @@ module.exports = (env) => {
         plugins: [
             new HtmlWebpackPlugin({
                 favicon: "./src/assets/favicon.jpg",
-                title: 'Cute Pig Club 3D Pig Number '+env.pigNumber
+                title: 'New Project Number '+env.pigNumber
             }),
             new CleanWebpackPlugin()
         ],
