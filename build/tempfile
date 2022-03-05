@@ -1,9 +1,5 @@
-import gltfPath5 from '../../../src/models/shirts/Grey.gltf'; 
-import gltfPath4 from '../../../src/models/necklace/Cross.gltf'; 
-import gltfPath3 from '../../../src/models/hats/ETHBallcap.gltf'; 
-import gltfPath2 from '../../../src/models/glasses/Olympia.gltf'; 
-import gltfPath1 from '../../../src/models/face/Mask.gltf'; 
-import gltfPath0 from '../../../src/models/bodies/BronzePig.gltf'; 
+import gltfPath from '../../../src/models/1'; 
+import gltfPath0 from '../../../src/models/bodies'; 
 import "../../../src/css/main.css";
 import * as THREE from '../../three.module.js';
 import { OrbitControls } from '../../../src/jsm/controls/OrbitControls.js';
@@ -74,61 +70,11 @@ export function init() {
     const loader = new GLTFLoader() ;
                 
         loader.load( gltfPath0, function ( gltf ) {
-        gltf.scene.traverse( function ( child ) {
-            if ( child.isMesh ) {
-                child.castShadow = true; 
-            }
-        } );
         gltf.scene.position.y += 10.2
         scene.add( gltf.scene );
         render();
         } );
-        loader.load( gltfPath1, function ( gltf ) {
-        gltf.scene.traverse( function ( child ) {
-            if ( child.isMesh ) {
-                child.castShadow = true; 
-            }
-        } );
-        gltf.scene.position.y += 10.2
-        scene.add( gltf.scene );
-        render();
-        } );
-        loader.load( gltfPath2, function ( gltf ) {
-        gltf.scene.traverse( function ( child ) {
-            if ( child.isMesh ) {
-                child.castShadow = true; 
-            }
-        } );
-        gltf.scene.position.y += 10.2
-        scene.add( gltf.scene );
-        render();
-        } );
-        loader.load( gltfPath3, function ( gltf ) {
-        gltf.scene.traverse( function ( child ) {
-            if ( child.isMesh ) {
-                child.castShadow = true; 
-            }
-        } );
-        gltf.scene.position.y += 10.2
-        scene.add( gltf.scene );
-        render();
-        } );
-        loader.load( gltfPath4, function ( gltf ) {
-        gltf.scene.traverse( function ( child ) {
-            if ( child.isMesh ) {
-                child.castShadow = true; 
-            }
-        } );
-        gltf.scene.position.y += 10.2
-        scene.add( gltf.scene );
-        render();
-        } );
-        loader.load( gltfPath5, function ( gltf ) {
-        gltf.scene.traverse( function ( child ) {
-            if ( child.isMesh ) {
-                child.castShadow = true; 
-            }
-        } );
+        loader.load( gltfPath, function ( gltf ) {
         gltf.scene.position.y += 10.2
         scene.add( gltf.scene );
         render();

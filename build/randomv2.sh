@@ -128,6 +128,8 @@ for filename in $(ls ../src/models/bodies); do
 done
 
 let i=0
+eyes[i]="NONE"
+let "i++"
 for filename in $(ls ../src/models/eyes); do
     eyes[i]="/eyes/$filename"
     let i=i+1
@@ -176,37 +178,23 @@ do
         cat ./topfile.js > tempfile
 
         let i=0
+        # for each type of model
         for i in {0..7}; do
             #echo $i
             rando=${dig[$i]}
-            if [ $rando -eq 0 ] && [ $i -ne 0 ] && [ $i -ne 6 ] && [ $i -ne 7 ] # Zeros are always "NONE", except when a body
+            if [ $rando -eq 0 ] && [ $i -ne 0 ] # Zeros are always "NONE", except when a body
             then
                 echo -e "\t\t\"${hrNames[$i]}\": \"None\"," >> metadata
-                if [ $i -eq 4 ] # if hats are none, hair is none too
-                then
-                    echo -e "\t\t\"Hair\": \"None\"," >> metadata
-                fi
             else
                 declare -n index=${arNames[$i]}
+                # declare -n is required in linux, typeset mac
+                #typeset index=${arNames[$i]}
                 modelPath=${index[$rando]}
                 modelBase=$(basename ${index[$rando]} .gltf)
                 #if its a hat then we have to see if its hair
-                if [ $i -eq 4 ]
-                then
-                    #echo $modelBase
-                    case $modelBase in
-                    *cut)
-                        echo -e "\t\t\"Hair\": \"$modelBase\"," >> metadata
-                        echo -e "\t\t\"Hat\": \"None\"," >> metadata
-                    ;;
-                    *)
-                        echo -e "\t\t\"Hair\": \"None\"," >> metadata
-                        echo -e "\t\t\"Hat\": \"$modelBase\"," >> metadata
-                    ;;
-                    esac
-                else
+
                 echo -e "\t\t\"${hrNames[$i]}\": \"$modelBase\"," >> metadata
-                fi
+                
                 insertresource $modelPath $gltfCount
                 #echo $modelPath
                 let "gltfCount++"
@@ -228,9 +216,9 @@ do
 
         #increment the pig number
         let "pigNumber++"
-        echo "Pig Number $pigNumber"
+        echo "New Model Number $pigNumber"
 
-        echo "Script prgress: Randomized and compiled $pigNumber 3D Pigs in $runtime seconds..."
+        echo "Script prgress: Randomized and compiled $pigNumber New Models in $runtime seconds..."
     fi
  
 
