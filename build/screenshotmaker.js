@@ -19,16 +19,16 @@ const directoryPath = path.join(__dirname, 'copies/1');
 (async () => {
 	//const browser = await puppeteer.launch();
  	//const page = await browser.newPage();
-	for (let i = 101; i < 201; i++) {
+	for (let i = 0; i < 4; i++) {
 	        const browser = await puppeteer.launch();
         const page = await browser.newPage();
 //  await page.goto('file:///home/kzin/git_projects/theproject/dist/0/index.html');
-	await page.goto('https://cutepigclub.mypinata.cloud/ipfs/QmfWK1GazJ4truyBbaDVxExcBiJteu7Ar53GQUcUfncwcx/' + i +'/index.html');
+	await page.goto('http://www.pigs.com/' + i +'/index.html');
 //  await page.waitForNavigation({
 //  	waitUntil: 'load',
 //	timeout: 0
 //  });
-	var previewpath = './copies/1/' + i + '/' + i + '.jpg';
+	var previewpath = './output/' + i + '/' + i + '.jpg';
 	await page.waitForTimeout(60000);
 	await page.screenshot({ path: previewpath, type: 'jpeg' });
 
