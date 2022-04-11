@@ -55,4 +55,5 @@ npm install --save-dev puppeteer
 1386  nohup ipfs add --recursive ./copies &
 
 # To compress GLTF files
+https://github.com/CesiumGS/gltf-pipeline
 sudo npm install -g gltf-pipeline
