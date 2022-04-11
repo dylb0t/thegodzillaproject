@@ -26,6 +26,7 @@ IPFS configuration
  1189  kill -9 1985
  
  # requirements
+<<<<<<< HEAD
 Need npm
 (Mac) port install npm8
 (Linux) npm install instructions? apt-get? yum?
@@ -33,6 +34,8 @@ Need npm
 Need webpack
 npm install --save-dev webpack
 
+=======
+>>>>>>> 8c4499f438ae372050120620ffbfbe1dae21deab
 Need webpack loaders
 npm install --save-dev html-webpack-plugin clean-webpack-plugin terser-webpack-plugin
 

@@ -74,7 +74,27 @@ export function init() {
 
     const loader = new GLTFLoader() ;
                 
+<<<<<<< HEAD
         loader.load( gltfPath, function ( gltf ) {
+        gltf.scene.position.y += 10.2
+        scene.add( gltf.scene );
+        render();
+        } );
+        loader.load( gltfPath, function ( gltf ) {
+        gltf.scene.position.y += 10.2
+        scene.add( gltf.scene );
+        render();
+        } );
+        loader.load( gltfPath, function ( gltf ) {
+=======
+        loader.load( gltfPath0, function ( gltf ) {
+>>>>>>> 8c4499f438ae372050120620ffbfbe1dae21deab
+        gltf.scene.position.y += 10.2
+        scene.add( gltf.scene );
+        render();
+        } );
+        loader.load( gltfPath, function ( gltf ) {
+<<<<<<< HEAD
         gltf.scene.position.y += 10.2
         scene.add( gltf.scene );
         render();
@@ -90,21 +110,8 @@ export function init() {
         render();
         } );
         loader.load( gltfPath, function ( gltf ) {
-        gltf.scene.position.y += 10.2
-        scene.add( gltf.scene );
-        render();
-        } );
-        loader.load( gltfPath, function ( gltf ) {
-        gltf.scene.position.y += 10.2
-        scene.add( gltf.scene );
-        render();
-        } );
-        loader.load( gltfPath, function ( gltf ) {
-        gltf.scene.position.y += 10.2
-        scene.add( gltf.scene );
-        render();
-        } );
-        loader.load( gltfPath, function ( gltf ) {
+=======
+>>>>>>> 8c4499f438ae372050120620ffbfbe1dae21deab
         gltf.scene.position.y += 10.2
         scene.add( gltf.scene );
         render();

@@ -124,6 +124,8 @@ for filename in $(ls ../src/models/bodies); do
 done
 
 let i=0
+eyes[i]="NONE"
+let "i++"
 for filename in $(ls ../src/models/eyes); do
     eyes[i]="/eyes/$filename"
     let i=i+1
