@@ -2,15 +2,15 @@ var HtmlWebpackPlugin = require("html-webpack-plugin")
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const TerserPlugin = require('terser-webpack-plugin');
 module.exports = (env) => {
-    console.log('pigNumber: ', env.pigNumber);
+    console.log('zillaNumber: ', env.zillaNumber);
 
     return{
         mode: "production",
-        entry: "./build/output/"+env.pigNumber+"/index.js",
+        entry: "./build/output/"+env.zillaNumber+"/index.js",
         plugins: [
             new HtmlWebpackPlugin({
                 favicon: "./src/assets/favicon.jpg",
-                title: 'Cute Pig Club 3D Pig Number '+env.pigNumber
+                title: 'New Project Number '+env.zillaNumber
             }),
             new CleanWebpackPlugin()
         ],
@@ -23,7 +23,7 @@ module.exports = (env) => {
 	},
         output: {
             filename: '[fullhash].js',
-            path: __dirname + '/dist/' + env.pigNumber
+            path: __dirname + '/dist/' + env.zillaNumber
         },
         module: {
             rules: [{ 

@@ -15,11 +15,11 @@ export function init() {
     document.body.appendChild( container );
 
     camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
-    camera.position.set( - 1.8, 0.6, 15.7 );
+    camera.position.set( - 15, -20.5, 35.7 );
 
     scene = new THREE.Scene();
 
-    scene.background = new THREE.Color( 0X000000 );
+    scene.background = new THREE.Color( 0X999999 );
 
     const ambientLight = new THREE.AmbientLight( 0xcccccc, 0.4 ); // soft white light
     scene.add( ambientLight );
@@ -33,7 +33,7 @@ export function init() {
     texture.repeat.y = 100;
 
     var groundMaterial = new THREE.MeshStandardMaterial( { 
-        color: 0X000000, 
+        color: 0XF5F5F5, 
         metalness: .9, 
         roughness: 0.1, 
         //clearcoat: 1.0, 

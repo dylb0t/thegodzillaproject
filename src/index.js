@@ -40,11 +40,11 @@ export function init() {
     document.body.appendChild( container );
 
     camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
-    camera.position.set( - 1.8, 0.6, 15.7 );
+    camera.position.set( - 15, -20.5, 35.7 );
 
     scene = new THREE.Scene();
 
-    scene.background = new THREE.Color( 0X000000 );
+    scene.background = new THREE.Color( 0X999999 );
 
     const ambientLight = new THREE.AmbientLight( 0xcccccc, 0.4 ); // soft white light
     scene.add( ambientLight );
@@ -58,7 +58,7 @@ export function init() {
     texture.repeat.y = 100;
 
     var groundMaterial = new THREE.MeshStandardMaterial( { 
-        color: 0X000000, 
+        color: 0XF5F5F5, 
         metalness: .9, 
         roughness: 0.1, 
         //clearcoat: 1.0, 
@@ -111,7 +111,7 @@ export function init() {
     // scene.add( helper );
 
     const loader = new GLTFLoader() ;
-    loader.load( './models/bodies/BrownPig.gltf', function ( gltf ) {
+    loader.load( './models/bodies/brown.gltf', function ( gltf ) {
         gltf.scene.traverse( function ( child ) {
 
             if ( child.isMesh ) {
@@ -122,76 +122,76 @@ export function init() {
         //This positions the model right at the ground
         //gltf.scene.position.y += 9.4
         //But the wings go below the ground so lets try to raise osme more
-        gltf.scene.position.y += 10.2
+        gltf.scene.position.y += .2
 
         scene.add( gltf.scene );
         render();
     } );
 
-    loader.load( './models/accessories/Wings.gltf', function ( gltf ) {
+    loader.load( './models/wings/gray.gltf', function ( gltf ) {
     	gltf.scene.traverse( function ( child ) {
 
     		if ( child.isMesh ) {
     			child.castShadow = true; 
     		}
     	} );
-    	gltf.scene.position.y += 10.2
+    	gltf.scene.position.y += .2
 
     	scene.add( gltf.scene );
     	//render();
 
     } );
 
-    loader.load( './models/glasses/Hornrim.gltf', function ( gltf ) {
+    loader.load( './models/horns/blue.gltf', function ( gltf ) {
     	gltf.scene.traverse( function ( child ) {
 
     		if ( child.isMesh ) {
     			child.castShadow = true; 
     		}
     	} );
-    	gltf.scene.position.y += 10.2
+    	gltf.scene.position.y += .2
 
     	scene.add( gltf.scene );
     	//render();
 
     } );
 
-    loader.load( './models/hats/Fedora.gltf', function ( gltf ) {
+    loader.load( './models/eyes/blue.gltf', function ( gltf ) {
     	gltf.scene.traverse( function ( child ) {
 
     		if ( child.isMesh ) {
     			child.castShadow = true; 
     		}
     	} );
-    	gltf.scene.position.y += 10.2
+    	gltf.scene.position.y += .2
 
     	scene.add( gltf.scene );
     	render();
 
     } );
 
-    loader.load( './models/necklace/Cross.gltf', function ( gltf ) {
+    loader.load( './models/necklaces/medallion.gltf', function ( gltf ) {
     	gltf.scene.traverse( function ( child ) {
 
     		if ( child.isMesh ) {
     			child.castShadow = true; 
     		}
     	} );
-    	gltf.scene.position.y += 10.2
+    	gltf.scene.position.y += .2
 
     	scene.add( gltf.scene );
     	render();
 
     } );
 
-    loader.load( './models/shirts/Polkadot.gltf', function ( gltf ) {
+    loader.load( './models/eyebrows/brown.gltf', function ( gltf ) {
     	gltf.scene.traverse( function ( child ) {
 
     		if ( child.isMesh ) {
     			child.castShadow = true; 
     		}
     	} );
-    	gltf.scene.position.y += 10.2
+    	gltf.scene.position.y += .2
 
     	scene.add( gltf.scene );
     	render();
