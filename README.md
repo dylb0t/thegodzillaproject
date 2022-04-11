@@ -1,7 +1,7 @@
-# thenewproject
+# thegodzillaproject
 To run a local http server w/ Pythion:
 ```python3 -m http.server```
-# Some notes from the pig project
+# Some run history from the pig project
 IPFS configuration
 1027  ipfs config
  1028  ipfs config edit
@@ -26,7 +26,9 @@ IPFS configuration
  1189  kill -9 1985
  
  # requirements
-<<<<<<< HEAD
+Need LFS
+https://git-lfs.github.com
+
 Need npm
 (Mac) port install npm8
 (Linux) npm install instructions? apt-get? yum?
@@ -34,8 +36,6 @@ Need npm
 Need webpack
 npm install --save-dev webpack
 
-=======
->>>>>>> 8c4499f438ae372050120620ffbfbe1dae21deab
 Need webpack loaders
 npm install --save-dev html-webpack-plugin clean-webpack-plugin terser-webpack-plugin
 
@@ -56,4 +56,5 @@ npm install --save-dev puppeteer
 
 # To compress GLTF files
 https://github.com/CesiumGS/gltf-pipeline
+
 sudo npm install -g gltf-pipeline
