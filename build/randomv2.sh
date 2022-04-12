@@ -124,8 +124,6 @@ for filename in $(ls ../src/models/bodies); do
 done
 
 let i=0
-eyes[i]="NONE"
-let "i++"
 for filename in $(ls ../src/models/eyes); do
     eyes[i]="/eyes/$filename"
     let i=i+1
@@ -178,7 +176,7 @@ do
         for i in {0..7}; do
             #echo $i
             rando=${dig[$i]}
-            if [ $rando -eq 0 ] && [ $i -ne 0 ] # "NONE" are always zeros, when present. None only for 5, 6 and 7. 
+            if [ $rando -ne 0 ] && ( [ $i -eq 5 ] || [ $i -eq 6] || [$ -eq 7] ) # "NONE" are always zeros, when present. None only for 5, 6 and 7. 
             then
                 echo -e "\t\t\"${hrNames[$i]}\": \"None\"," >> metadata
             else
