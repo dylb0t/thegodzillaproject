@@ -1,16 +1,10 @@
-//import gltfPath from './models/3dpigpreview.gltf';
 import * as THREE from '../build/three.module.js';
 import { OrbitControls } from './jsm/controls/OrbitControls.js';
 import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
-//import { RGBELoader } from './jsm/loaders/RGBELoader.js';
-//import { RoughnessMipmapper } from './jsm/utils/RoughnessMipmapper.js';
+import { DRACOLoader } from './jsm/loaders/DRACOLoader.js'
 import { FlakesTexture } from './jsm/textures/FlakesTexture.js';
-//import { Reflector } from './jsm/objects/Reflector.js'
-
-
 
 let camera, scene, renderer, groundFX;
-
 
 init();
 render();
@@ -111,6 +105,9 @@ export function init() {
     // scene.add( helper );
 
     const loader = new GLTFLoader() ;
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath( '/src/draco/' );
+    loader.setDRACOLoader( dracoLoader );
     loader.load( './models/bodies/brown.gltf', function ( gltf ) {
         gltf.scene.traverse( function ( child ) {
 

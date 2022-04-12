@@ -2,6 +2,7 @@ import "../../../src/css/main.css";
 import * as THREE from '../../three.module.js';
 import { OrbitControls } from '../../../src/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from '../../../src/jsm/loaders/GLTFLoader.js';
+import { DRACOLoader } from './jsm/loaders/DRACOLoader.js'
 import { FlakesTexture } from '../../../src/jsm/textures/FlakesTexture.js';
 
 let camera, scene, renderer, groundFX;
@@ -66,4 +67,6 @@ export function init() {
     // scene.add( helper );
 
     const loader = new GLTFLoader() ;
-                
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath( '/src/draco/' );
+    loader.setDRACOLoader( dracoLoader );
