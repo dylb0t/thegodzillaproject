@@ -106,7 +106,7 @@ export function init() {
 
     const loader = new GLTFLoader() ;
     const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath( '/src/draco/' );
+    dracoLoader.setDecoderPath( '../../draco/' );
     loader.setDRACOLoader( dracoLoader );
     loader.load( './models/bodies/brown.gltf', function ( gltf ) {
         gltf.scene.traverse( function ( child ) {
