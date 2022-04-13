@@ -187,7 +187,7 @@ do
             # echo "index [rando] ${index[$rando]}"
             # echo "arnames [i] ${arNames[$i]}"
             modelPath=${index[$rando]}
-            if [modelPath = 'NONE']
+            if [$modelPath = 'NONE']
             then
                 echo -e "\t\t\"${hrNames[$i]}\": \"None\"," >> metadata
             else
