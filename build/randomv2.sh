@@ -176,7 +176,7 @@ do
         for i in {0..7}; do
             #echo $i
             rando=${dig[$i]}
-            if [ $rando -ne 0 ] && ( [ $i -eq 5 ] || [ $i -eq 6] || [$ -eq 7] ) # "NONE" are always zeros, when present. None only for 5, 6 and 7. 
+            if [ $rando -ne 0 ] && ( [ $i -eq 5 ] || [ $i -eq 6] || [$i -eq 7] ) # "NONE" are always zeros, when present. None only for 5, 6 and 7. 
             then
                 echo -e "\t\t\"${hrNames[$i]}\": \"None\"," >> metadata
             else
