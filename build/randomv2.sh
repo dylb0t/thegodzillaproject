@@ -176,28 +176,28 @@ do
         for i in {0..7}; do
             #echo $i
             rando=${dig[$i]}
-            if [ $rando -ne 0 ] && ( [ $i -eq 5 ] || [ $i -eq 6] || [$i -eq 7] ) # "NONE" are always zeros, when present. None only for 5, 6 and 7. 
+
+            # https://stackoverflow.com/questions/16553089/dynamic-variable-names-in-bash
+            declare -n index=${arNames[$i]}
+            # declare -n is required in linux, trying IFS method for mac. Typeset didn't work, also printf didn't work.
+            #typeset index=${arNames[$i]}
+            #printf -v "$index" `%s` ${arNames[$i]}
+            #IFS= read -r "$index" <<< ${arNames[$i]}
+            # echo "index $index"
+            # echo "index [rando] ${index[$rando]}"
+            # echo "arnames [i] ${arNames[$i]}"
+            modelPath=${index[$rando]}
+            if [modelPath = 'NONE']
             then
                 echo -e "\t\t\"${hrNames[$i]}\": \"None\"," >> metadata
             else
-                # https://stackoverflow.com/questions/16553089/dynamic-variable-names-in-bash
-                declare -n index=${arNames[$i]}
-                # declare -n is required in linux, trying IFS method for mac. Typeset didn't work, also printf didn't work.
-                #typeset index=${arNames[$i]}
-                #printf -v "$index" `%s` ${arNames[$i]}
-                #IFS= read -r "$index" <<< ${arNames[$i]}
-                # echo "index $index"
-                # echo "index [rando] ${index[$rando]}"
-                # echo "arnames [i] ${arNames[$i]}"
-                modelPath=${index[$rando]}
                 modelBase=$(basename ${index[$rando]} .gltf)
-
                 echo -e "\t\t\"${hrNames[$i]}\": \"$modelBase\"," >> metadata
-                
                 insertresource $modelPath $gltfCount
-                #echo $modelPath
-                let "gltfCount++"
             fi
+            #echo $modelPath
+            let "gltfCount++"
+
         done
         echo -e "\t\t\"tokenId\": \"$zillaNumber\"\n\t}," >> metadata
         
