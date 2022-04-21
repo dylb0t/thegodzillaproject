@@ -3,7 +3,6 @@ import * as THREE from '../../three.module.js';
 import { OrbitControls } from '../../../src/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from '../../../src/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from '../../../src/jsm/loaders/DRACOLoader.js'
-import { FlakesTexture } from '../../../src/jsm/textures/FlakesTexture.js';
 
 let camera, scene, renderer, groundFX;
 
@@ -11,40 +10,26 @@ init();
 render();
 
 export function init() {
-    //const gltfPath = './models/3dpigpreview.gltf';
     const container = document.createElement( 'div' );
     document.body.appendChild( container );
 
-    camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
-    camera.position.set( - 15, -20.5, 35.7 );
+    camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+    camera.position.set( 100, 200, 300 );
 
     scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2( 0xa0a0a0, .005 );
+    scene.background = new THREE.Color( 0xa0a0a0 );
 
-    scene.background = new THREE.Color( 0X999999 );
-
-    const ambientLight = new THREE.AmbientLight( 0xcccccc, 0.4 ); // soft white light
+    const ambientLight = new THREE.AmbientLight( 0xcccccc, 0.55 ); // soft white light
     scene.add( ambientLight );
 
     // Ground
-    // Lets create a gold flake ground
-    let texture = new THREE.CanvasTexture(new FlakesTexture());
-    texture.wrapS = THREE.RepeatWrapping;
-    texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.x = 100;
-    texture.repeat.y = 100;
-
-    var groundMaterial = new THREE.MeshStandardMaterial( { 
-        color: 0XF5F5F5, 
-        metalness: .9, 
-        roughness: 0.1, 
-        //clearcoat: 1.0, 
-        normalMap: texture, 
-        normalScale: new THREE.Vector2(.15,.15) 
-    } );
     
-    const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 1000, 1000 ), groundMaterial);
+    const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 1000, 1000 ));
     mesh.rotation.x = - Math.PI / 2;
     mesh.receiveShadow = true;
+    mesh.material = new THREE.MeshStandardMaterial( { color: 0x999999 } )
+
     scene.add( mesh );
 
     // Shadow casting light

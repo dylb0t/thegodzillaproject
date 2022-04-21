@@ -2,91 +2,61 @@ import * as THREE from '../build/three.module.js';
 import { OrbitControls } from './jsm/controls/OrbitControls.js';
 import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from './jsm/loaders/DRACOLoader.js'
-import { FlakesTexture } from './jsm/textures/FlakesTexture.js';
 
 let camera, scene, renderer, groundFX;
 
 init();
 render();
-//animate();
 
-// var manager = new THREE.LoadingManager();
-
-// manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
-//     progressElement.style.width = (itemsLoaded / itemsTotal * 100) + '%';
-// };
 
 export function init() {
 
-    // const loadingManager = new THREE.LoadingManager( () => {
-	
-	// 	const loadingScreen = document.getElementById( 'loading-screen' );
-	// 	loadingScreen.classList.add( 'fade-out' );
-		
-	// 	// optional: remove loader from DOM via event listener
-	// 	loadingScreen.addEventListener( 'transitionend', loadingScreen.onTransitionEnd );
-		
-	// } );
-
-    //const gltfPath = './models/3dpigpreview.gltf';
-    //cost gltfPath = new gltfPath();
     const container = document.createElement( 'div' );
     document.body.appendChild( container );
 
-    camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
-    camera.position.set( - 15, -20.5, 35.7 );
+    //camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
+    //camera.position.set( - 15, -20.5, 35.7 );
+
+    camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+				camera.position.set( 100, 200, 300 );
 
     scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2( 0xa0a0a0, .005 );
+    scene.background = new THREE.Color( 0xa0a0a0 );
+    //scene.background = new THREE.Color( 0X999999 );
 
-    scene.background = new THREE.Color( 0X999999 );
-
-    const ambientLight = new THREE.AmbientLight( 0xcccccc, 0.4 ); // soft white light
+    const ambientLight = new THREE.AmbientLight( 0xcccccc, 0.55 ); // soft white light
     scene.add( ambientLight );
-
-    // Ground
-    // Lets create a gold flake ground
-    let texture = new THREE.CanvasTexture(new FlakesTexture());
-    texture.wrapS = THREE.RepeatWrapping;
-    texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.x = 100;
-    texture.repeat.y = 100;
-
-    var groundMaterial = new THREE.MeshStandardMaterial( { 
-        color: 0XF5F5F5, 
-        metalness: .9, 
-        roughness: 0.1, 
-        //clearcoat: 1.0, 
-        normalMap: texture, 
-        normalScale: new THREE.Vector2(.15,.15) 
-    } );
-    
-    const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 1000, 1000 ), groundMaterial);
+   
+    const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 1000, 1000 ));
     mesh.rotation.x = - Math.PI / 2;
     mesh.receiveShadow = true;
+    mesh.material = new THREE.MeshStandardMaterial( { color: 0x999999 } )
+
+    // const grid = new THREE.GridHelper( 2000, 20, 0x000000, 0x000000 );
+    // grid.material.opacity = 0.2;
+    // grid.material.transparent = true;
+    // scene.add( grid );
+
+    // const planeGeometry = new THREE.PlaneGeometry( 20, 20, 32, 32 );
+    // const planeMaterial = new THREE.MeshStandardMaterial( { color: 0x999999 } )
+    // const plane = new THREE.Mesh( planeGeometry, planeMaterial );
+    // plane.receiveShadow = true;
+    // scene.add( plane );
     scene.add( mesh );
     //scene.background = mesh;
     // Add some reflection to it
     // var planeGeometry = new THREE.PlaneBufferGeometry(1, 1);
 
-    // var mirrorOptions = {
-    // 	clipBias:0.03,
-    // 	textureWidth: window.innerWidth * window.devicePixelRatio,
-    // 	textureHeight: window.innerHeight * window.DevicePixelRatio,
-    // 	recursion: 1
-    // }
-
-    // var mirror = new Reflector(planeGeometry, mirrorOptions);
-    // mirror.rotateX(-Math.PI /2);
-    // scene.add(mirror);
 
     // Shadow casting light
-    const dirLight = new THREE.DirectionalLight( 0xffffff );
-    dirLight.position.set( 3, 15, 10 );
+    const dirLight = new THREE.DirectionalLight( 0x999999, .55 );
+    dirLight.position.set( 3, 25, 10 );
     dirLight.castShadow = true;
     dirLight.shadow.camera.top = 30;
     dirLight.shadow.camera.bottom = - 30;
-    dirLight.shadow.camera.left = - 30;
-    dirLight.shadow.camera.right = 30;
+    dirLight.shadow.camera.left = - 60;
+    dirLight.shadow.camera.right = 60;
     dirLight.shadow.camera.near = 0.1;
     dirLight.shadow.camera.far = 2540;
     dirLight.shadow.mapSize.width = 1540
@@ -101,8 +71,8 @@ export function init() {
 
 
     // Shadow light helper... I hope we don't need this again
-    // const helper = new THREE.DirectionalLightHelper( dirLight, 5, "#FFFF00" );
-    // scene.add( helper );
+    //  const helper = new THREE.DirectionalLightHelper( dirLight, 5, "#FFFF00" );
+    //  scene.add( helper );
 
     const loader = new GLTFLoader() ;
     const dracoLoader = new DRACOLoader();
@@ -116,10 +86,7 @@ export function init() {
             }
 
         } );
-        //This positions the model right at the ground
-        //gltf.scene.position.y += 9.4
-        //But the wings go below the ground so lets try to raise osme more
-        gltf.scene.position.y += .2
+        gltf.scene.position.y += 1.3
 
         scene.add( gltf.scene );
         render();
@@ -132,11 +99,9 @@ export function init() {
     			child.castShadow = true; 
     		}
     	} );
-    	gltf.scene.position.y += .2
+    	gltf.scene.position.y += 1.3
 
     	scene.add( gltf.scene );
-    	//render();
-
     } );
 
     loader.load( './models/horns/blue.gltf', function ( gltf ) {
@@ -146,11 +111,9 @@ export function init() {
     			child.castShadow = true; 
     		}
     	} );
-    	gltf.scene.position.y += .2
+    	gltf.scene.position.y += 1.3
 
     	scene.add( gltf.scene );
-    	//render();
-
     } );
 
     loader.load( './models/eyes/blue.gltf', function ( gltf ) {
@@ -160,7 +123,7 @@ export function init() {
     			child.castShadow = true; 
     		}
     	} );
-    	gltf.scene.position.y += .2
+    	gltf.scene.position.y += 1.3
 
     	scene.add( gltf.scene );
     	render();
@@ -174,7 +137,7 @@ export function init() {
     			child.castShadow = true; 
     		}
     	} );
-    	gltf.scene.position.y += .2
+    	gltf.scene.position.y += 1.3
 
     	scene.add( gltf.scene );
     	render();
@@ -188,7 +151,7 @@ export function init() {
     			child.castShadow = true; 
     		}
     	} );
-    	gltf.scene.position.y += .2
+    	gltf.scene.position.y += 1.3
 
     	scene.add( gltf.scene );
     	render();
