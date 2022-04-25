@@ -46,7 +46,7 @@ insertresource() {
     
 cat <<-EOF >> tempfile
         loader.load( gltfPath$2, function ( gltf ) {
-        gltf.scene.position.y += .5
+        gltf.scene.position.y += 1.3
         scene.add( gltf.scene );
         render();
         } );
@@ -65,7 +65,7 @@ cat <<-EOF >> tempfile
                 child.castShadow = true; 
             }
         } );
-        gltf.scene.position.y += .5
+        gltf.scene.position.y += 1.3
         scene.add( gltf.scene );
         render();
         } );
@@ -218,8 +218,13 @@ do
         echo "New Model Number $zillaNumber"
 
         echo "Script prgress: Randomized and compiled $zillaNumber New Models in $runtime seconds..."
+        if [ $zillaNumber -eq 4999 ]
+            then 
+                break
+        fi
     fi
- 
+    echo "Generating screenshots"
+    node screenshotmaker.js
 
 done
 

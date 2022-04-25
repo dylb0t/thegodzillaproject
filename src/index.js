@@ -18,11 +18,11 @@ export function init() {
     //camera.position.set( - 15, -20.5, 35.7 );
 
     camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
-				camera.position.set( 100, 200, 300 );
+	camera.position.set( -20, 30, 35 );
 
     scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2( 0xa0a0a0, .005 );
-    scene.background = new THREE.Color( 0xa0a0a0 );
+    scene.fog = new THREE.FogExp2( 0xe397a6, .005 );
+    scene.background = new THREE.Color( 0xe397a6 );
     //scene.background = new THREE.Color( 0X999999 );
 
     const ambientLight = new THREE.AmbientLight( 0xcccccc, 0.55 ); // soft white light
@@ -31,7 +31,7 @@ export function init() {
     const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 1000, 1000 ));
     mesh.rotation.x = - Math.PI / 2;
     mesh.receiveShadow = true;
-    mesh.material = new THREE.MeshStandardMaterial( { color: 0x999999 } )
+    mesh.material = new THREE.MeshStandardMaterial( { color: 0xe397a6 } )
 
     // const grid = new THREE.GridHelper( 2000, 20, 0x000000, 0x000000 );
     // grid.material.opacity = 0.2;

@@ -4,185 +4,107 @@
 		<title>Put address of NFT here</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<!-- <link type="text/css" rel="stylesheet" href="main.css"> -->
+		<link rel="icon" type="image/x-icon" href="./assets/favicon.jpg" />
+		<!-- <link type="text/css" rel="stylesheet" href="./css/main.css"> -->
 	</head>
+	<style>
+		html,
+		body,
+		canvas {
+			margin: 0;
+			width: 100%;
+			height: 100%;
+			display: block;
+		}
+		#loading-screen {
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000000;
+	opacity: 1;
+ 	transition: 1s opacity;
+}
+
+#loading-screen.fade-out {
+    opacity: 0;
+}
+
+#loader {
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #9370DB;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+#loader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #BA55D3;
+    -webkit-animation: spin 3s linear infinite;
+    animation: spin 3s linear infinite;
+}
+#loader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #FF00FF;
+    -webkit-animation: spin 1.5s linear infinite;
+    animation: spin 1.5s linear infinite;
+}
+@-webkit-keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+	</style>
 
 	<body>
-        <!-- <div style="height:700px; width:960px; margin:auto;"> -->
-		<script type="module">
-
-			import * as THREE from '../build/three.module.js';
-
-			import { OrbitControls } from './jsm/controls/OrbitControls.js';
-			import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
-			//import { RGBELoader } from './jsm/loaders/RGBELoader.js';
-			//import { RoughnessMipmapper } from './jsm/utils/RoughnessMipmapper.js';
-			//import { FlakesTexture } from './jsm/textures/FlakesTexture.js'
-
-			let camera, scene, renderer, groundFX;
-
-			init();
-			render();
-
-			function init() {
-
-				const container = document.createElement( 'div' );
-				document.body.appendChild( container );
-
-				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 100 );
-				camera.position.set( - 1.8, 0.6, 15.7 );
-
-				scene = new THREE.Scene();
-
-				//texture.mapping = THREE.EquirectangularReflectionMapping;
-
-				//scene.background = texture;
-				scene.background = new THREE.Color( 0xa0a0a0 );
-				//scene.fog = new THREE.Fog( 0xa0a0a0, 10, 500 );
-				//scene.environment = texture;
-				//const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444, 100 );
-				//hemiLight.position.set( 0, 20, 0 );
-				//scene.add( hemiLight );
-
-				const ambientLight = new THREE.AmbientLight( 0x404040 ); // soft white light
-				scene.add( ambientLight );
-
-				// Ground
-				//var mirrorMaterial = new THREE.MeshBasicMaterial( { color: 0x111111, envMap: mirrorCamera.renderTarget } );
-				//var groundMaterial = new THREE.MeshStandardMaterial( { color: 0XFFCC88, metalness = 1 } );
-				const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 1000, 1000 ), new THREE.MeshStandardMaterial( { color: 0XFFD700, metalness: 1, roughness: 0.5, envMap: camera.renderTarget } ) );
-				//const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 1000, 1000 ),  );
-				mesh.rotation.x = - Math.PI / 2;
-				mesh.receiveShadow = true;
-				scene.add( mesh );
-
-				// Shadow casting light
-				const dirLight = new THREE.DirectionalLight( 0xffffff );
-				dirLight.position.set( 3, 20, 10 );
-				dirLight.castShadow = true;
-				dirLight.shadow.camera.top = 30;
-				dirLight.shadow.camera.bottom = - 30;
-				dirLight.shadow.camera.left = - 30;
-				dirLight.shadow.camera.right = 30;
-				dirLight.shadow.camera.near = 0.1;
-				dirLight.shadow.camera.far = 2540;
-				dirLight.shadow.mapSize.width = 2540
-				dirLight.shadow.mapSize.height = 2540
-
-				scene.add( dirLight );
-
-				// Shadow light helper... I hope we don't need this again
-				// const helper = new THREE.DirectionalLightHelper( dirLight, 5, "#FFFF00" );
-				// scene.add( helper );
-
-				const loader = new GLTFLoader().setPath( 'models/' );
-				loader.load( 'pigbody2.gltf', function ( gltf ) {
-					gltf.scene.traverse( function ( child ) {
-
-						if ( child.isMesh ) {
-							child.castShadow = true; 
-							//child.receiveShadow = true;
-						}
-
-					} );
-					gltf.scene.position.y += 9.4
-
-					scene.add( gltf.scene );
-					render();
-				} );
-
-				loader.load( 'face/mask1.gltf', function ( gltf ) {
-					gltf.scene.traverse( function ( child ) {
-
-						if ( child.isMesh ) {
-							child.castShadow = true; 
-						}
-					} );
-					gltf.scene.position.y += 9.4
-
-					scene.add( gltf.scene );
-					render();
-
-				} );
-
-				loader.load( 'glasses/glasses.gltf', function ( gltf ) {
-					gltf.scene.traverse( function ( child ) {
-
-						if ( child.isMesh ) {
-							child.castShadow = true; 
-						}
-					} );
-					gltf.scene.position.y += 9.4
-
-					scene.add( gltf.scene );
-					render();
-
-				} );
-
-				loader.load( 'hats/hat2.gltf', function ( gltf ) {
-					gltf.scene.traverse( function ( child ) {
-
-						if ( child.isMesh ) {
-							child.castShadow = true; 
-						}
-						if ( child.isMaterial ) {
-							child.Material.side = THREE.DoubleSide;
-						}
-					} );
-					gltf.scene.position.y += 9.4
-
-					scene.add( gltf.scene );
-					render();
-
-				} );
-
-				renderer = new THREE.WebGLRenderer( { antialias: true } );
-				renderer.setPixelRatio( window.devicePixelRatio );
-                renderer.setSize( window.innerWidth, window.innerHeight );
-				//renderer.setSize( window.innerWidth -150, window.innerHeight -150 );
-                //renderer.setSize( 450, 450 );
-				renderer.toneMapping = THREE.ACESFilmicToneMapping;
-				renderer.toneMappingExposure = 1;
-				renderer.outputEncoding = THREE.sRGBEncoding;
-                renderer.shadowMap.enabled = true;
-                //renderer.shadowmap.type = THREE.PCFSoftwareShadowMap;
-
-                render();
-
-				container.appendChild( renderer.domElement );
-
-				const controls = new OrbitControls( camera, renderer.domElement );
-				controls.addEventListener( 'change', render ); // use if there is no animation loop
-				controls.minDistance = 25;
-				controls.maxDistance = 75;
-				controls.target.set( 0, 9.4, - 0.2 );
-                controls.maxPolarAngle = 1.55
-				controls.update();
-
-				window.addEventListener( 'resize', onWindowResize );
-
-			} 
-
-			function onWindowResize() {
-
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
-
-				renderer.setSize( window.innerWidth, window.innerHeight );
-
-				render();
-
-			}
-
-			//
-
-			function render() {
-
-				renderer.render( scene, camera );
-
-			}
-
-		</script>
-    <!-- </div> -->
-	</body>
-</html>
+		
+        <div>
+			<!--<section id="loading-screen"><div id="loader"></div></section>-->
+			 <!--<script src="../dist/pigsample.js"> -->
+				 <script type="module" src="./index.js">	
+			</script>
+		</div>
+    </body>
+</html> 
