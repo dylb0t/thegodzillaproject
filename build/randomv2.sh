@@ -223,11 +223,12 @@ do
                 break
         fi
     fi
-    echo "Generating screenshots"
-    node screenshotmaker.js
+
 
 done
 
+echo "Generating screenshots"
+node screenshotmaker.js
 
 
 
